@@ -396,6 +396,51 @@ p {
   margin-top: 10px;
 }
 
+.bibtex {
+  position: relative;
+  margin-top: 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--soft);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+
+.bibtex pre {
+  margin: 0;
+  padding: 26px 24px;
+  overflow-x: auto;
+}
+
+.bibtex code {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.86rem;
+  line-height: 1.65;
+  color: var(--ink);
+  white-space: pre;
+}
+
+.bibtex__copy {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  min-height: 32px;
+  padding: 0 15px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--brand);
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 750;
+  cursor: pointer;
+  transition: border-color 160ms ease, color 160ms ease;
+}
+
+.bibtex__copy:hover {
+  border-color: var(--brand);
+}
+
 .footer {
   padding: 38px 0;
   background: #101827;
