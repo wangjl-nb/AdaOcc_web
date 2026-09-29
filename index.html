@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Anonymous AdaOcc project page for an adaptive 3D semantic occupancy prediction framework for embodied tasks.">
+  <title>AdaOcc: Adaptive 3D Occupancy Prediction for Embodied Tasks</title>
+  <link rel="stylesheet" href="static/css/style.css?v=20260527-abstract-method-anchor">
+</head>
+<body>
+  <header class="hero" id="top">
+    <nav class="nav" aria-label="Page navigation">
+      <a class="nav__brand" href="#top" aria-label="AdaOcc home">AdaOcc</a>
+      <div class="nav__links">
+        <a href="#abstract">Abstract</a>
+        <a href="#method">Method</a>
+        <a href="#results">Results</a>
+        <a href="#image-overview">Image Overview</a>
+        <a href="#real-world">Real-World</a>
+        <a href="#release">Anonymous Release</a>
+      </div>
+    </nav>
+
+    <div class="hero__body">
+      <h1>AdaOcc: Adaptive 3D Occupancy Prediction for Embodied Tasks</h1>
+      <p class="subtitle">
+        A point-based adaptive 3D semantic occupancy framework for embodied scene understanding,
+        designed to adapt across compute budgets, sensor setups, observation views, and downstream tasks.
+      </p>
+
+      <div class="notice" role="note">
+        <strong>Anonymous version.</strong>
+        Identity-bearing material is intentionally withheld during review. This page contains only project-level
+        technical content and anonymous-safe media.
+      </div>
+
+      <div class="action-row" aria-label="Unavailable anonymous-review resources">
+        <span class="action-pill action-pill--disabled">Paper PDF withheld</span>
+        <span class="action-pill action-pill--disabled">Code link withheld</span>
+        <span class="action-pill action-pill--disabled">Citation withheld</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section abstract-section" id="abstract" aria-labelledby="abstract-title">
+      <div class="container abstract-container">
+        <div class="section-heading">
+          <h2 id="abstract-title">Abstract</h2>
+        </div>
+        <p class="abstract-copy">
+          Embodied tasks demand accurate, flexible, and semantically rich 3D scene representations. 3D semantic occupancy is well suited to this requirement, as it can model holistic 3D spaces by encoding geometric occupancy along with semantic categories. However, existing occupancy prediction methods struggle to meet practical deployment requirements, such as adapting to varying computing budgets, sensor setups, and observation views. In this paper, we propose a point-based Adaptive 3D Occupancy Prediction method, called AdaOcc, tailored for embodied scenarios. To accommodate heterogeneous sensor inputs, AdaOcc uses an adaptive geometry-guided dual-branch encoder that can support RGB images in various numbers of views with (estimated) depth maps or LiDAR scans. AdaOcc represents occupied regions via sparse semantic points trained with a progressive query learning strategy, allowing the prediction computational budget to be flexibly adjusted through query point numbers and decoder layers. To facilitate high-fidelity geometric modeling for lightweight point-based occupancy learning, we further propose a novel containment loss that regularizes predicted points to reside within valid occupied regions. Extensive experiments show that our method achieves a new state-of-the-art on Occ-ScanNet with considerable performance improvements over previous methods. Moreover, our framework demonstrates strong practical applicability as an adaptive 3D perception module in real-world embodied systems.
+        </p>
+      </div>
+    </section>
+
+    <section class="section teaser-section" aria-labelledby="teaser-title">
+      <div class="container">
+        <div class="main-video-card">
+          <h2 id="teaser-title">AdaOcc overview video</h2>
+          <div class="main-video-frame">
+            <video class="main-video" controls muted loop playsinline preload="auto" poster="static/media/videos/poster.png" aria-label="AdaOcc main project video">
+              <source src="static/media/videos/main.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="method" aria-labelledby="method-title">
+      <div class="container">
+        <div class="section-heading">
+          <h2 id="method-title">Adaptive sparse occupancy perception</h2>
+        </div>
+
+        <div class="method-grid">
+          <article class="card">
+            <span class="card__index">1</span>
+            <h3>Adaptive dual-branch encoding</h3>
+            <p>
+              RGB observations provide semantic cues while optional geometric inputs are normalized into a
+              unified point-set interface, enabling the same model to handle depth-based or LiDAR-based sensing.
+            </p>
+          </article>
+          <article class="card">
+            <span class="card__index">2</span>
+            <h3>Sparse semantic points</h3>
+            <p>
+              Occupied regions are represented as sparse points with semantic logits, avoiding unnecessary dense
+              computation in empty space while preserving a standard occupancy output through voxelization.
+            </p>
+          </article>
+          <article class="card">
+            <span class="card__index">3</span>
+            <h3>Progressive query learning</h3>
+            <p>
+              Multi-layer decoder supervision lets intermediate outputs remain useful, so inference can trade
+              quality for speed through both query-number and decoder-layer controls.
+            </p>
+          </article>
+          <article class="card">
+            <span class="card__index">4</span>
+            <h3>Containment optimization</h3>
+            <p>
+              A containment-guided objective encourages predicted points to lie inside valid occupied regions,
+              reducing floating artifacts and sharpening consistency near object boundaries.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--light" aria-labelledby="contributions-title">
+      <div class="container">
+        <div class="section-heading">
+          <h2 id="contributions-title">Key contributions</h2>
+        </div>
+
+        <div class="contribution-list">
+          <div class="contribution-item">
+            <h3>Point-based adaptive 3D occupancy</h3>
+            <p>
+              AdaOcc provides a unified framework for embodied scene understanding with flexible occupancy
+              prediction under varying compute budgets, sensor setups, and inference settings.
+            </p>
+          </div>
+          <div class="contribution-item">
+            <h3>Robust adaptive design</h3>
+            <p>
+              The framework combines an adaptive geometry-guided dual-branch encoder, progressive query
+              learning, and containment-guided optimization to improve boundary fidelity and deployment flexibility.
+            </p>
+          </div>
+          <div class="contribution-item">
+            <h3>Benchmark and deployment evidence</h3>
+            <p>
+              AdaOcc achieves state-of-the-art Occ-ScanNet performance with large margins over prior methods,
+              and real-world embodied-system deployment demonstrates effectiveness, efficiency, and adaptability.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="results" aria-labelledby="results-title">
+      <div class="container">
+        <div class="section-heading">
+          <h2 id="results-title">Accuracy, efficiency, and adaptability</h2>
+        </div>
+
+        <div class="metric-grid">
+          <div class="metric-card">
+            <span class="metric-card__value">65.29</span>
+            <span class="metric-card__label">IoU on Occ-ScanNet</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-card__value">59.67</span>
+            <span class="metric-card__label">mIoU on Occ-ScanNet</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-card__value">+2.46</span>
+            <span class="metric-card__label">IoU over the previous best result</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-card__value">+7.84</span>
+            <span class="metric-card__label">mIoU over the previous best result</span>
+          </div>
+        </div>
+
+        <div class="split-panel">
+          <div>
+            <h3>Budget-adaptive inference</h3>
+            <p>
+              Query-number and decoder-layer controls let the model produce coarser or finer occupancy outputs
+              depending on latency, memory, and task-granularity requirements.
+            </p>
+          </div>
+          <div>
+            <h3>Backbone-controlled comparison</h3>
+            <p>
+              Under the same EfficientNet image encoder used by the strongest baseline, AdaOcc still reaches
+              59.03 mIoU and 64.60 IoU, improving by 7.20 mIoU and 1.77 IoU.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--light image-overview-section" id="image-overview" aria-labelledby="image-overview-title">
+      <div class="container">
+        <div class="section-heading">
+          <h2 id="image-overview-title">Visual summary of AdaOcc</h2>
+          <p>
+            A compact visual tour of the method, qualitative comparisons, adaptability studies, planning examples,
+            and real-world embodied demonstrations.
+          </p>
+        </div>
+
+        <div class="carousel" data-carousel aria-label="AdaOcc image overview carousel">
+          <button class="carousel__button carousel__button--prev" type="button" aria-label="Previous image" data-carousel-prev>‹</button>
+          <div class="carousel__viewport" tabindex="0" data-carousel-viewport>
+            <div class="carousel__stage" data-carousel-stage>
+              <figure class="carousel__slide is-active">
+                <img src="static/media/roll_pics/teaser.png" alt="AdaOcc teaser overview" loading="eager" decoding="async">
+                <figcaption>Teaser overview: adaptive 3D occupancy prediction for embodied tasks.</figcaption>
+              </figure>
+              <figure class="carousel__slide">
+                <img src="static/media/roll_pics/pipeline.png" alt="AdaOcc model pipeline" loading="lazy" decoding="async">
+                <figcaption>Pipeline: visual and geometric cues are fused into adaptive sparse occupancy predictions.</figcaption>
+              </figure>
+              <figure class="carousel__slide">
+                <img src="static/media/roll_pics/device.png" alt="Embodied platform and sensor setup" loading="lazy" decoding="async">
+                <figcaption>Embodied platform setup: AdaOcc adapts across heterogeneous sensors and robot configurations.</figcaption>
+              </figure>
+              <figure class="carousel__slide">
+                <img src="static/media/roll_pics/CPO.png" alt="Containment-guided point optimization illustration" loading="lazy" decoding="async">
+                <figcaption>Containment-guided point optimization improves point placement inside valid occupied regions.</figcaption>
+              </figure>
+              <figure class="carousel__slide">
+                <img src="static/media/roll_pics/occ_compare.png" alt="Qualitative occupancy comparison" loading="lazy" decoding="async">
+                <figcaption>Qualitative comparison: AdaOcc reconstructs scene geometry and semantics with stronger fidelity.</figcaption>
+              </figure>
+              <figure class="carousel__slide">
+                <img src="static/media/roll_pics/tartanground_adaptability.png" alt="Adaptability analysis with depth and LiDAR inputs" loading="lazy" decoding="async">
+                <figcaption>Adaptability analysis: depth- and LiDAR-guided inputs support varying embodied sensing conditions.</figcaption>
+              </figure>
+              <figure class="carousel__slide">
+                <img src="static/media/roll_pics/open_vocabulary.png" alt="Open-vocabulary scene understanding visualization" loading="lazy" decoding="async">
+                <figcaption>Open-vocabulary visualization for semantic scene understanding.</figcaption>
+              </figure>
+              <figure class="carousel__slide">
+                <img src="static/media/roll_pics/astar_plan.png" alt="Path planning example using occupancy" loading="lazy" decoding="async">
+                <figcaption>Planning example: occupancy predictions provide structured spatial cues for navigation.</figcaption>
+              </figure>
+              <figure class="carousel__slide">
+                <img src="static/media/roll_pics/nav_demo.png" alt="Navigation demonstration using AdaOcc" loading="lazy" decoding="async">
+                <figcaption>Navigation demonstration: AdaOcc supports target-aware movement in real scenes.</figcaption>
+              </figure>
+              <figure class="carousel__slide">
+                <img src="static/media/roll_pics/demo.png" alt="Real-world embodied demo snapshot" loading="lazy" decoding="async">
+                <figcaption>Embodied demo: sparse semantic occupancy acts as a practical 3D perception module.</figcaption>
+              </figure>
+            </div>
+          </div>
+          <button class="carousel__button carousel__button--next" type="button" aria-label="Next image" data-carousel-next>›</button>
+          <div class="carousel__dots" aria-label="Choose image slide" data-carousel-dots>
+            <button type="button" class="is-active" aria-label="Show slide 1" aria-current="true" data-carousel-dot="0"></button>
+            <button type="button" aria-label="Show slide 2" data-carousel-dot="1"></button>
+            <button type="button" aria-label="Show slide 3" data-carousel-dot="2"></button>
+            <button type="button" aria-label="Show slide 4" data-carousel-dot="3"></button>
+            <button type="button" aria-label="Show slide 5" data-carousel-dot="4"></button>
+            <button type="button" aria-label="Show slide 6" data-carousel-dot="5"></button>
+            <button type="button" aria-label="Show slide 7" data-carousel-dot="6"></button>
+            <button type="button" aria-label="Show slide 8" data-carousel-dot="7"></button>
+            <button type="button" aria-label="Show slide 9" data-carousel-dot="8"></button>
+            <button type="button" aria-label="Show slide 10" data-carousel-dot="9"></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section real-world-section" id="real-world" aria-labelledby="real-world-title">
+      <div class="container">
+        <div class="section-heading real-world-heading">
+          <h2 id="real-world-title">AdaOcc in Real-World Embodied Scenarios</h2>
+        </div>
+
+        <div class="real-world-board" aria-label="AdaOcc real-world embodied scenario examples">
+          <article class="real-world-column">
+            <h3>Video</h3>
+            <figure class="real-world-frame real-world-frame--video">
+              <video controls muted playsinline preload="metadata" poster="static/media/real_world/dog-nav-catch-poster.jpg" src="static/media/real_world/dog-nav-catch.mp4"></video>
+            </figure>
+            <figure class="real-world-frame real-world-frame--video">
+              <video controls muted playsinline preload="metadata" poster="static/media/real_world/manipulation-poster.jpg" src="static/media/real_world/manipulation.mp4"></video>
+            </figure>
+            <figure class="real-world-frame real-world-frame--video">
+              <video controls muted playsinline preload="metadata" poster="static/media/real_world/nav-poster.jpg" src="static/media/real_world/nav.mp4"></video>
+            </figure>
+            <figure class="real-world-frame real-world-frame--video real-world-frame--contain-video">
+              <video controls muted playsinline preload="metadata" poster="static/media/real_world/human-nav-catch-poster.jpg" src="static/media/real_world/human-nav-catch.mp4"></video>
+            </figure>
+          </article>
+
+          <article class="real-world-column">
+            <h3>Depth</h3>
+            <figure class="real-world-frame real-world-frame--depth">
+              <img src="static/media/real_world/dog-nav-catch-depth.png" alt="Dog navigation depth visualization" loading="lazy" decoding="async">
+            </figure>
+            <figure class="real-world-frame real-world-frame--depth">
+              <img src="static/media/real_world/manipulation-depth.png" alt="Manipulation depth visualization" loading="lazy" decoding="async">
+            </figure>
+            <figure class="real-world-frame real-world-frame--depth">
+              <img src="static/media/real_world/nav-depth.png" alt="Navigation depth visualization" loading="lazy" decoding="async">
+            </figure>
+            <figure class="real-world-frame real-world-frame--depth">
+              <img src="static/media/real_world/human-nav-catch-depth.png" alt="Human navigation depth visualization" loading="lazy" decoding="async">
+            </figure>
+          </article>
+
+          <article class="real-world-column">
+            <h3>Occupancy</h3>
+            <figure class="real-world-frame real-world-frame--occ">
+              <img src="static/media/real_world/dog-nav-catch-occ.png" alt="Dog navigation AdaOcc semantic occupancy visualization" loading="lazy" decoding="async">
+            </figure>
+            <figure class="real-world-frame real-world-frame--occ">
+              <img src="static/media/real_world/manipulation-occ.png" alt="Manipulation AdaOcc semantic occupancy visualization" loading="lazy" decoding="async">
+            </figure>
+            <figure class="real-world-frame real-world-frame--occ">
+              <img src="static/media/real_world/nav-occ.png" alt="Navigation AdaOcc semantic occupancy visualization" loading="lazy" decoding="async">
+            </figure>
+            <figure class="real-world-frame real-world-frame--occ">
+              <img src="static/media/real_world/human-nav-catch-occ.png" alt="Human navigation AdaOcc semantic occupancy visualization" loading="lazy" decoding="async">
+            </figure>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--light" id="release" aria-labelledby="release-title">
+      <div class="container narrow">
+        <h2 id="release-title">Anonymous release</h2>
+        <p>
+          This preview is prepared for public GitHub Pages hosting while withholding identity-bearing resources.
+          After the anonymous period, the disabled resource pills can be replaced with public paper, code, citation,
+          author, and affiliation links.
+        </p>
+        <ol class="release-list">
+          <li>Only anonymous-safe technical content and media are included in this preview.</li>
+          <li>Paper PDF, code link, and BibTeX entries remain withheld during review.</li>
+          <li>Final identity-bearing resources can be added after anonymous-review restrictions are lifted.</li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>Anonymous AdaOcc project page preview.</p>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      document.querySelectorAll('[data-carousel]').forEach((carousel) => {
+        const slides = Array.from(carousel.querySelectorAll('.carousel__slide'));
+        const dots = Array.from(carousel.querySelectorAll('[data-carousel-dot]'));
+        const prev = carousel.querySelector('[data-carousel-prev]');
+        const next = carousel.querySelector('[data-carousel-next]');
+        const viewport = carousel.querySelector('[data-carousel-viewport]');
+
+        if (slides.length === 0) return;
+
+        let current = 0;
+        let timer = null;
+
+        const render = () => {
+          slides.forEach((slide, index) => {
+            const active = index === current;
+            slide.classList.toggle('is-active', active);
+            slide.setAttribute('aria-hidden', String(!active));
+          });
+          dots.forEach((dot, index) => {
+            const active = index === current;
+            dot.classList.toggle('is-active', active);
+            if (active) dot.setAttribute('aria-current', 'true');
+            else dot.removeAttribute('aria-current');
+          });
+        };
+
+        const goTo = (index) => {
+          current = (index + slides.length) % slides.length;
+          render();
+        };
+
+        const start = () => {
+          if (prefersReducedMotion || timer || slides.length < 2) return;
+          timer = window.setInterval(() => goTo(current + 1), 5500);
+        };
+
+        const stop = () => {
+          if (!timer) return;
+          window.clearInterval(timer);
+          timer = null;
+        };
+
+        prev?.addEventListener('click', () => {
+          stop();
+          goTo(current - 1);
+          start();
+        });
+        next?.addEventListener('click', () => {
+          stop();
+          goTo(current + 1);
+          start();
+        });
+        dots.forEach((dot) => dot.addEventListener('click', () => {
+          stop();
+          goTo(Number(dot.dataset.carouselDot));
+          start();
+        }));
+
+        viewport?.addEventListener('keydown', (event) => {
+          if (event.key === 'ArrowLeft') {
+            event.preventDefault();
+            stop();
+            goTo(current - 1);
+            start();
+          }
+          if (event.key === 'ArrowRight') {
+            event.preventDefault();
+            stop();
+            goTo(current + 1);
+            start();
+          }
+        });
+
+        carousel.addEventListener('pointerenter', stop);
+        carousel.addEventListener('pointerleave', start);
+        carousel.addEventListener('focusin', stop);
+        carousel.addEventListener('focusout', start);
+
+        render();
+        start();
+      });
+    })();
+  </script>
+</body>
+</html>
