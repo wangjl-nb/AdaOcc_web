@@ -203,6 +203,31 @@ h1 {
   cursor: not-allowed;
 }
 
+.action-pill--link {
+  color: #ffffff;
+  background: linear-gradient(120deg, var(--brand), var(--brand-2));
+  border: 1px solid transparent;
+  text-decoration: none;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.action-pill--link:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.action-pill--soon {
+  color: #64748b;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px dashed #aab8cc;
+}
+
+.notice--accepted {
+  border-color: #bbf7d0;
+  background: #f0fdf4;
+  color: #15803d;
+}
+
 .section {
   padding: 86px 0;
 }

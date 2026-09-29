@@ -1,68 +1,60 @@
-# Anonymous AdaOcc Project Page
+# AdaOcc Project Page
 
-This folder contains the static GitHub Pages-ready anonymous preview page for:
+Static GitHub Pages site for **AdaOcc: Adaptive 3D Occupancy Prediction for Embodied Tasks** (NeurIPS 2026).
 
-**AdaOcc: Adaptive 3D Occupancy Prediction for Embodied Tasks**
-
-The page intentionally does **not** include author names, affiliations, contact details, code links, PDF downloads, or BibTeX entries.
+**Live site:** <https://wangjl-nb.github.io/AdaOcc_web/>
 
 ## Files
 
 ```text
-site/
+.
 ├── index.html                    # Main project page with inline carousel interaction
-├── CNAME                         # Custom GitHub Pages domain
 ├── .nojekyll                     # GitHub Pages static-site compatibility
 ├── README.md                     # This guide
 └── static/
     ├── css/style.css             # Self-contained styling
     └── media/
-        ├── README.md             # Media safety notes
+        ├── README.md             # Media notes
         ├── videos/
         │   ├── main.mp4          # Browser-compatible main video
         │   └── poster.png        # Video poster frame
         ├── roll_pics/            # Image Overview carousel assets
-        └── real_world/           # Real-world scenario section placeholders
+        └── real_world/           # Real-world scenario assets
 ```
-
-## Safety rule: upload only `site/` contents
-
-Do **not** upload the parent `projectpage_opus/` folder. It contains the paper PDF and downloaded example template files. Publish only the files inside `projectpage_opus/site/`.
 
 ## Current media
 
 - Main video: `static/media/videos/main.mp4`
 - Video poster: `static/media/videos/poster.png`
 - Carousel images: `static/media/roll_pics/*.png`
-- Real-world scenario images: `static/media/real_world/*.png`
+- Real-world scenario assets: `static/media/real_world/*`
 
-PDF source figures from `roll_pics/` were rendered into PNG files for browser compatibility before publication. The original PDF sources are not part of this publish bundle.
+PDF source figures from `roll_pics/` were rendered into PNG files for browser compatibility. The original PDF sources are not part of this bundle.
+
+Media totals roughly 79 MB, of which about 53 MB is video. GitHub Pages has a soft bandwidth limit of 100 GB per month, so consider offloading or re-encoding the videos if the page starts drawing heavy traffic.
 
 ## Preview locally
 
 ```bash
-cd projectpage_opus/site
 python3 -m http.server 8000
 ```
 
-Then open:
+Then open <http://localhost:8000>.
 
-```text
-http://localhost:8000
-```
+## Deployment
 
-## Anonymous publishing checklist
+The site is published from the `main` branch root via GitHub Pages (`Deploy from a branch` → `main` → `/`). Push to `main` and the site rebuilds automatically. There is no build step: the repository contains the served files directly.
 
-Before publishing, confirm:
+## Custom domain
 
-- [ ] `index.html` has no author names, contact details, homepages, or profile links.
-- [ ] `index.html` has no affiliation, lab, company, or funding details.
-- [ ] No code repository link is visible.
-- [ ] No PDF download link is visible.
-- [ ] No BibTeX entry with author data is visible.
-- [ ] Media files do not contain watermarks, people, usernames, paths, or metadata that reveal identity.
-- [ ] Only `site/` contents are pushed to the public repository.
+No custom domain is currently configured; the site is served from the default `*.github.io` address. To attach one, set it under **Settings → Pages → Custom domain** and create the matching DNS records at your registrar:
 
-## After anonymous review
+- Apex domain (`example.com`): `A` records to `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
+- Subdomain (`www.example.com`): `CNAME` record to `wangjl-nb.github.io` (without the repository name)
 
-After anonymous-review restrictions are lifted, `index.html` can be updated to add public paper, code, citation, author, and affiliation links.
+A given custom domain can be attached to only one GitHub Pages site across all of GitHub.
+
+## Related repositories
+
+- Code, data preparation, and reproduction docs: <https://github.com/wangjl-nb/AdaOcc>
+- Released checkpoints: <https://huggingface.co/wjldragon/AdaOcc>
